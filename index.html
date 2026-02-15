@@ -50,53 +50,62 @@ button:hover {
 .heart-container {
     display: none;
     position: absolute;
-    top: 18%;
+    top: 16%;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.heart {
+.heart-wrapper {
     position: relative;
-    width: 260px;
-    height: 240px;
+    width: 300px;
+    height: 260px;
+}
+
+.heart {
+    position: absolute;
+    width: 300px;
+    height: 260px;
     background: #ff004c;
     transform: rotate(-45deg);
     animation: beat 1.3s infinite;
     box-shadow: 0 0 50px rgba(255,0,80,0.9);
+    z-index: 1;
 }
 
 .heart::before,
 .heart::after {
     content: "";
     position: absolute;
-    width: 260px;
-    height: 240px;
+    width: 300px;
+    height: 260px;
     background: #ff004c;
     border-radius: 50%;
 }
 
 .heart::before {
-    top: -130px;
+    top: -150px;
     left: 0;
 }
 
 .heart::after {
-    left: 130px;
+    left: 150px;
     top: 0;
 }
 
+/* TEXTO ENCIMA DEL CORAZÓN */
 .heart-text {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) rotate(45deg);
-    width: 100%;
-    font-size: 26px;
+    transform: translate(-50%, -50%);
+    font-size: 28px;
     font-weight: bold;
     color: white;
     text-align: center;
-    padding: 0 10px;
-    text-shadow: 0 0 15px #fff;
+    z-index: 10;
+    text-shadow: 0 0 20px #fff;
+    width: 100%;
+    pointer-events: none;
 }
 
 /* CARRUSEL */
@@ -161,7 +170,8 @@ button:hover {
 </div>
 
 <div class="heart-container" id="heartContainer">
-    <div class="heart">
+    <div class="heart-wrapper">
+        <div class="heart"></div>
         <div class="heart-text">Te amo mucho Ana</div>
     </div>
 </div>
