@@ -42,13 +42,13 @@
       font-size: 1.25rem;
       color: #444;
       line-height: 1.7;
-      min-height: 220px;
+      min-height: 230px;
       white-space: pre-line;
     }
 
     button {
       margin-top: 25px;
-      padding: 12px 25px;
+      padding: 12px 30px;
       font-size: 1rem;
       border: none;
       border-radius: 30px;
@@ -72,18 +72,32 @@
       opacity: 0.8;
     }
 
+    .final {
+      margin-top: 30px;
+      font-size: 1.6rem;
+      color: #d63384;
+      font-weight: bold;
+      animation: aparecer 2s ease forwards;
+    }
+
+    .corazon {
+      font-size: 90px;
+      margin-top: 10px;
+      animation: latir 1.2s infinite;
+    }
+
+    @keyframes latir {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.2); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.25); }
+      100% { transform: scale(1); }
+    }
+
     @keyframes float {
-      0% {
-        transform: translateY(100vh) scale(0.5);
-        opacity: 0;
-      }
-      50% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-10vh) scale(1.2);
-        opacity: 0;
-      }
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
     }
 
     @keyframes fadeIn {
@@ -95,49 +109,26 @@
       from { text-shadow: 0 0 5px #ff85a2; }
       to { text-shadow: 0 0 20px #ff4d6d; }
     }
+
+    @keyframes aparecer {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
   </style>
-  <style>
-  .final {
-    margin-top: 30px;
-    font-size: 1.6rem;
-    color: #d63384;
-    font-weight: bold;
-    animation: aparecer 2s ease forwards;
-  }
-
-  .corazon {
-    font-size: 80px;
-    animation: latir 1.2s infinite;
-    margin-top: 10px;
-  }
-
-  @keyframes latir {
-    0% { transform: scale(1); }
-    25% { transform: scale(1.2); }
-    50% { transform: scale(1); }
-    75% { transform: scale(1.25); }
-    100% { transform: scale(1); }
-  }
-
-  @keyframes aparecer {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-</style>
-
 </head>
+
 <body>
 
   <div class="card">
     <h1>💜 Para Ana 💜</h1>
     <div id="mensaje"></div>
-   <button onclick="mostrarFinal()">Haz clic aquí 💕</button>
+    <button onclick="mostrarFinal()">Haz clic aquí 💕</button>
   </div>
 
-  <!-- Música suave -->
- <audio id="musica" loop>
-  <source src="Damiano_Tango.mp3" type="audio/mpeg">
- </audio>
+  <!-- Música (empieza al hacer clic) -->
+  <audio id="musica" loop>
+    <source src="tango-damiano-david.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
     const texto = `Hola Ana 💜
@@ -165,23 +156,19 @@ Siempre voy a estar para ti 🤍`;
     }
 
     escribir();
-            function mostrarFinal() {
-                // Música
-                const musica = document.getElementById("musica");
-                musica.play();
 
-                // Mensaje final
-                const contenedor = document.getElementById("mensaje");
-                contenedor.innerHTML += `
-                <div class="final">
-                    Te amo mucho Ana
-                    <div class="corazon">❤️</div>
-                </div>
-                `;
-            }
-            </script>
+    function mostrarFinal() {
+      // Reproducir música
+      const musica = document.getElementById("musica");
+      musica.play();
 
-Te amo mucho Ana 💖`;
+      // Mensaje final con corazón latiendo
+      contenedor.innerHTML += `
+        <div class="final">
+          Te amo mucho Ana
+          <div class="corazon">❤️</div>
+        </div>
+      `;
     }
 
     function createHeart() {
@@ -193,9 +180,7 @@ Te amo mucho Ana 💖`;
       heart.style.animationDuration = Math.random() * 3 + 4 + "s";
       document.body.appendChild(heart);
 
-      setTimeout(() => {
-        heart.remove();
-      }, 6000);
+      setTimeout(() => heart.remove(), 6000);
     }
 
     setInterval(createHeart, 350);
@@ -203,4 +188,6 @@ Te amo mucho Ana 💖`;
 
 </body>
 </html>
+
+
 
