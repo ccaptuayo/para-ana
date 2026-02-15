@@ -64,25 +64,21 @@
       box-shadow: 0 15px 30px rgba(0,0,0,0.3);
     }
 
-    .heart {
+    .corazon-final {
       position: absolute;
-      color: #ff4d6d;
-      font-size: 20px;
-      animation: float 6s linear infinite;
-      opacity: 0.8;
+      text-align: center;
+      animation: aparecer 1.5s ease forwards;
     }
 
-    .final {
-      margin-top: 30px;
-      font-size: 1.6rem;
-      color: #d63384;
+    .corazon-final .texto {
+      font-size: 2.2rem;
       font-weight: bold;
-      animation: aparecer 2s ease forwards;
+      color: #d63384;
+      margin-bottom: 20px;
     }
 
-    .corazon {
-      font-size: 90px;
-      margin-top: 10px;
+    .corazon-final .corazon {
+      font-size: 160px;
       animation: latir 1.2s infinite;
     }
 
@@ -94,10 +90,9 @@
       100% { transform: scale(1); }
     }
 
-    @keyframes float {
-      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
-      50% { opacity: 1; }
-      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    @keyframes aparecer {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
     }
 
     @keyframes fadeIn {
@@ -109,23 +104,18 @@
       from { text-shadow: 0 0 5px #ff85a2; }
       to { text-shadow: 0 0 20px #ff4d6d; }
     }
-
-    @keyframes aparecer {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
   </style>
 </head>
 
 <body>
 
-  <div class="card">
+  <div class="card" id="card">
     <h1>💜 Para Ana 💜</h1>
     <div id="mensaje"></div>
-    <button onclick="mostrarFinal()">Haz clic aquí 💕</button>
+    <button id="boton" onclick="mostrarFinal()">Haz clic aquí 💕</button>
   </div>
 
-  <!-- Música (empieza al hacer clic) -->
+  <!-- Música -->
   <audio id="musica" loop>
     <source src="Damiano_Tango.mp3" type="audio/mpeg">
   </audio>
@@ -159,36 +149,22 @@ Siempre voy a estar para ti 🤍`;
 
     function mostrarFinal() {
       // Reproducir música
-      const musica = document.getElementById("musica");
-      musica.play();
+      document.getElementById("musica").play();
 
-      // Mensaje final con corazón latiendo
-      contenedor.innerHTML += `
-        <div class="final">
-          Te amo mucho Ana
-          <div class="corazon">❤️</div>
-        </div>
+      // Eliminar todo lo anterior
+      document.getElementById("card").remove();
+
+      // Crear corazón final
+      const final = document.createElement("div");
+      final.className = "corazon-final";
+      final.innerHTML = `
+        <div class="texto">Te amo Ana</div>
+        <div class="corazon">❤️</div>
       `;
+      document.body.appendChild(final);
     }
-
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.innerHTML = "💖";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = Math.random() * 20 + 15 + "px";
-      heart.style.animationDuration = Math.random() * 3 + 4 + "s";
-      document.body.appendChild(heart);
-
-      setTimeout(() => heart.remove(), 6000);
-    }
-
-    setInterval(createHeart, 350);
   </script>
 
 </body>
 </html>
-
-
-
 
